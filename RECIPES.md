@@ -1,43 +1,105 @@
-# 실전 패턴: 언제 어떤 용어를 적용할까?
+# Practical Frontend Recipes
 
-[← README](README.md) · [인터랙션 용어](glossary/03-interaction.md)
+> [← Home](README.md) · [Interaction](glossary/03-interaction.md) · [State & Data](glossary/04-state-data.md)
 
-## 1. 검색어 입력: Debounce + AbortController
+These recipes connect glossary concepts to common problems. They describe **patterns and trade-offs**, not production-ready drop-in implementations.
 
-- 매 키 입력마다 API를 호출하지 않고 입력이 일정 시간 멈춘 뒤 요청합니다.
-- 이전 요청이 아직 끝나지 않았다면 취소하거나 요청 식별자를 비교해 오래된 응답을 무시합니다.
-- 취소만으로 모든 경쟁 상태를 완전히 피할 수 있는 것은 아닙니다.
+## 1. Search as you type: debounce + stale-response protection
 
-## 2. 스크롤 위치 추적: Throttle 또는 requestAnimationFrame
+**Problem:** Calling an API for every keystroke wastes bandwidth, and earlier requests may finish after newer ones.
 
-- 고빈도 이벤트를 그대로 무거운 계산에 연결하지 않습니다.
-- 화면 갱신 관련 작업은 requestAnimationFrame을 고려하고, 부가 분석 이벤트는 Throttle을 검토합니다.
-- 스크롤 중 가시성 감지는 IntersectionObserver도 대안입니다.
+**Approach:**
+1. Debounce the input event (for example, a 250–400 ms delay).
+2. Cancel a prior supported request with `AbortController`, or ignore responses that do not match the latest request identifier.
+3. Show an explicit loading and empty-result state; handle errors separately.
 
-## 3. 저장·결제 버튼의 따닥 방지: In-flight Guard + 서버 멱등성
+**Related terms:** [Debounce](glossary/03-interaction.md#debounce), [AbortController](glossary/04-state-data.md#abortcontroller), [Race Condition](glossary/04-state-data.md#race-condition), [Empty State](glossary/01-ui-ux.md#empty-state).
 
-1. 첫 클릭 시 즉시 작업 중 상태로 전환합니다.
-2. 요청 진행 중 같은 행동을 반복 실행하지 않도록 막습니다.
-3. 서버는 동일한 작업 식별자(Idempotency Key)를 재사용한 중복 요청의 효과를 중복 적용하지 않아야 합니다.
-4. 성공·실패·재시도 상태와 접근성 메시지를 제공합니다.
+## 2. Scroll-heavy pages: throttle, animation frames, and observers
 
-> **주의:** 단순 Throttle/Debounce만으로는 네트워크 재시도, 여러 탭, 서로 다른 기기에서 발생한 중복 결제를 보장할 수 없습니다.
+**Problem:** Scroll and pointer events may fire far more frequently than complex code can safely run.
 
-## 4. 목록 성능: Pagination + Virtualization + Lazy Loading
+**Approach:**
+- Use a throttle when you need a bounded update rate.
+- Use `requestAnimationFrame` for work synchronized with visual updates.
+- Prefer `IntersectionObserver` over repeated scroll-position calculations when only visibility matters.
+- Avoid unnecessary layout reads after writes, which can cause layout thrashing.
 
-- 서버가 내려주는 데이터 양은 페이지나 커서로 제한합니다.
-- DOM 항목이 매우 많다면 화면에 보이는 항목만 렌더링합니다.
-- 이미지 등 화면 밖 자원은 필요해질 때 로드합니다.
+**Related terms:** [Throttle](glossary/03-interaction.md#throttle), [requestAnimationFrame](glossary/07-performance.md#requestanimationframe), [Intersection Observer](glossary/05-web-browser.md#intersection-observer), [Layout Thrashing](glossary/07-performance.md#layout-thrashing).
 
-## 5. 모달 접근성: Dialog + Focus Management
+## 3. Prevent double submissions: in-flight guard + server idempotency
 
-- 모달 다이얼로그는 열린 동안 포커스 이동 범위를 관리하고 Escape·닫기 버튼을 제공합니다.
-- 닫으면 가능하면 원래 트리거로 포커스를 돌립니다.
-- 적절한 역할·이름과 배경 상호작용 차단을 함께 점검합니다.
+**Problem:** Double taps, network retries, multiple tabs, and duplicate clients may all submit the same purchase.
 
-## 더 읽기
+**Safe design:**
+1. Immediately mark the UI as submitting and block accidental resubmission.
+2. Reuse a unique **operation key** for retries of the *same logical transaction*.
+3. Implement and enforce idempotency on the server. A client-side delay does **not** guarantee safety.
+4. Distinguish successful completion from an unknown result after a timeout; confirm status before starting a new transaction.
+5. Restore an accessible error/retry state when appropriate.
 
-- [CSS-Tricks: Debounce & Throttle](https://css-tricks.com/debouncing-throttling-explained-examples/)
+```text
+User presses "Pay"
+  → UI: submitting = true
+  → Request: POST /payments (Idempotency-Key: same-operation-key)
+  → Server: process the operation at most once per key
+  → UI: show confirmed result; handle uncertain outcome separately
+```
+
+**Related terms:** [Double-submit Guard](glossary/03-interaction.md#double-submit-guard), [Cooldown](glossary/03-interaction.md#cooldown), [Idempotency](glossary/04-state-data.md#idempotency), [Retry](glossary/04-state-data.md#retry), [Race Condition](glossary/04-state-data.md#race-condition).
+
+## 4. Data fetching: cache, revalidation, and optimistic updates
+
+**Problem:** Refetching everything is slow, but stale cache entries can mislead users.
+
+**Approach:**
+- Cache data using keys that reflect the actual query.
+- Use stale-while-revalidate for screens where slightly old data is acceptable.
+- Invalidate or update relevant cached queries after a successful mutation.
+- For optimistic updates, snapshot the previous state and roll back on failure.
+- Prefer confirmed server results for irreversible or highly sensitive changes.
+
+**Related terms:** [Cache Invalidation](glossary/04-state-data.md#cache-invalidation), [Stale-While-Revalidate](glossary/04-state-data.md#stale-while-revalidate), [Optimistic Update](glossary/04-state-data.md#optimistic-update), [Rollback](glossary/04-state-data.md#rollback).
+
+## 5. Very large lists: pagination + virtualization + lazy loading
+
+**Problem:** Thousands of rows and images increase network, DOM, layout, and memory costs.
+
+**Approach:**
+- Fetch bounded pages, often with cursor pagination.
+- Render only visible/nearby rows when the DOM gets large.
+- Lazy-load offscreen images and serve responsive image sizes.
+- Keep keyboard navigation and screen-reader behavior usable.
+
+**Related terms:** [Cursor Pagination](glossary/04-state-data.md#cursor-pagination), [Virtualization](glossary/07-performance.md#virtualization), [Lazy Loading](glossary/07-performance.md#lazy-loading), [Responsive Images](glossary/07-performance.md#responsive-images).
+
+## 6. Accessible overlays: dialog, focus management, and announcements
+
+**Problem:** An overlay appears visually correct but is unusable from a keyboard or screen reader.
+
+**Approach:**
+- Give the dialog an accessible name and suitable semantics.
+- In a modal dialog, keep focus inside while open, then restore focus appropriately on close.
+- Provide an obvious dismiss action; follow the component's documented Escape-key behavior.
+- Announce meaningful dynamic feedback to assistive technologies without spamming notifications.
+
+**Related terms:** [Dialog](glossary/01-ui-ux.md#dialog), [Modal](glossary/01-ui-ux.md#modal), [Focus Trap](glossary/03-interaction.md#focus-trap), [Accessible Name](glossary/08-quality-tooling.md#accessible-name), [ARIA](glossary/08-quality-tooling.md#aria).
+
+## 7. SSR interfaces: avoid hydration mismatches
+
+**Problem:** The server renders different text or structure from the browser's first render.
+
+**Approach:**
+- Use deterministic initial content on server and client.
+- Do not assume browser-only APIs, local storage, random numbers, or local time are identical during server rendering.
+- Move environment-specific display changes to an appropriate client-only phase if needed.
+
+**Related terms:** [SSR](glossary/06-architecture.md#ssr), [Hydration](glossary/06-architecture.md#hydration), [Hydration Mismatch](glossary/04-state-data.md#hydration-mismatch).
+
+## Further reading
+
+- [CSS-Tricks: Debouncing and Throttling](https://css-tricks.com/debouncing-throttling-explained-examples/)
 - [MDN: AbortController](https://developer.mozilla.org/en-US/docs/Web/API/AbortController)
 - [Stripe: Idempotent requests](https://docs.stripe.com/api/idempotent_requests)
-- [WAI-ARIA Dialog Pattern](https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/)
+- [WAI-ARIA: Modal dialog pattern](https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/)
+- [web.dev: Learn Performance](https://web.dev/learn/performance)

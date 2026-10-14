@@ -1,58 +1,68 @@
-# 참고 자료 및 원문 링크
+# References & Further Reading
 
-[← README](README.md)
+> [← Home](README.md)
 
-이 저장소의 설명은 여러 자료에서 개념·용례를 참고해 **자체적으로 짧게 서술**했습니다. 외부 용어집을 통째로 복사하거나 번역한 문서가 아닙니다. 표준 동작을 확인하려면 공식 사양과 문서를 먼저 확인하세요.
+This collection brings together **official documentation**, recognized design systems, and curated explanatory resources. The glossary entries are independently written summaries; linking a source does **not** mean the source endorses this project. External articles and their text remain subject to their own licenses.
 
-## UI/UX · 컴포넌트
+## 1. UI/UX terms & component naming
 
-| 자료 | 특징 |
+| Reference | Why it's useful |
 | --- | --- |
-| [Nielsen Norman Group — UI Elements Glossary](https://www.nngroup.com/articles/ui-elements-glossary/) | 자주 쓰는 인터페이스 요소의 설명 |
-| [The Component Gallery](https://component.gallery/components/) | 디자인 시스템별 UI 컴포넌트 이름과 사례 |
-| [Uxcel Glossary](https://uxcel.com/glossary) | UI·UX·제품 디자인 용어 |
-| [Atlassian Design — Components](https://atlassian.design/components/) | 실제 디자인 시스템 컴포넌트의 사용 원칙 |
-| [Material UI Components](https://mui.com/material-ui/all-components/) | 웹 UI 컴포넌트 분류와 구현 예시 |
-| [shadcn/ui Components](https://ui.shadcn.com/docs/components) | 현대 React UI 컴포넌트 목록 |
-| [Apple Human Interface Guidelines](https://developer.apple.com/design/human-interface-guidelines/) | 플랫폼 UI 설계 지침 |
+| [Nielsen Norman Group — UI Elements Glossary](https://www.nngroup.com/articles/ui-elements-glossary/) | Definitions and conventions for commonly named UI elements. |
+| [The Component Gallery](https://component.gallery/components/) | Compare component names and variants across design systems. |
+| [Uxcel — UX Glossary](https://uxcel.com/glossary) | Broad vocabulary covering UX, product, interaction, and design. |
+| [Atlassian Design System — Components](https://atlassian.design/components/) | Real-world descriptions, anatomy, and usage guidelines. |
+| [Material UI — Components](https://mui.com/material-ui/all-components/) | Structured catalog of modern UI component types. |
+| [shadcn/ui — Components](https://ui.shadcn.com/docs/components) | React component names and practical implementations. |
+| [Apple Human Interface Guidelines — Components](https://developer.apple.com/design/human-interface-guidelines/components) | Platform-specific UI components and interaction standards. |
 
-## 디자인·CSS
+## 2. Visual design & CSS
 
-| 자료 | 특징 |
+| Reference | Why it's useful |
 | --- | --- |
-| [Atlassian Design — Foundations](https://atlassian.design/foundations/) | 색상·간격·타이포그래피 등 디자인 원칙 |
-| [CSS-Tricks Almanac](https://css-tricks.com/almanac/) | CSS 속성·선택자 백과 |
-| [web.dev — Learn CSS](https://web.dev/learn/css) | CSS 기초부터 레이아웃·반응형까지 |
-| [MDN CSS Reference](https://developer.mozilla.org/en-US/docs/Web/CSS/Reference) | CSS의 정확한 속성·선택자 문서 |
+| [Nielsen Norman Group — Visual Design Glossary](https://www.nngroup.com/articles/visual-design-cheat-sheet/) | Visual hierarchy, contrast, layout, and design principles. |
+| [Atlassian Design System — Foundations](https://atlassian.design/foundations/) | Design tokens, color, typography, spacing, and layout. |
+| [CSS-Tricks Almanac](https://css-tricks.com/almanac/) | A browsable reference for CSS properties and selectors. |
+| [web.dev — Learn CSS](https://web.dev/learn/css) | Guided CSS concepts with runnable examples. |
+| [MDN — CSS Reference](https://developer.mozilla.org/en-US/docs/Web/CSS/Reference) | Technical CSS reference and browser compatibility details. |
 
-## 인터랙션·JavaScript
+## 3. Interaction, JavaScript & async behavior
 
-| 자료 | 특징 |
+| Reference | Why it's useful |
 | --- | --- |
-| [CSS-Tricks — Debouncing and Throttling](https://css-tricks.com/debouncing-throttling-explained-examples/) | Debounce·Throttle 개념과 사례 |
-| [GreatFrontEnd — JavaScript](https://www.greatfrontend.com/front-end-interview-playbook/javascript) | JavaScript 핵심 개념과 구현 패턴 |
-| [MDN — Web Glossary](https://developer.mozilla.org/ko/docs/Glossary) | 브라우저·웹 기술 용어 사전 (한국어) |
-| [MDN — AbortController](https://developer.mozilla.org/en-US/docs/Web/API/AbortController) | 비동기 작업 취소 신호 |
-| [Stripe — Idempotent Requests](https://docs.stripe.com/api/idempotent_requests) | 재시도와 중복 요청 안전성의 실제 API 사례 |
+| [CSS-Tricks — Debouncing and Throttling](https://css-tricks.com/debouncing-throttling-explained-examples/) | Explains when and how to limit high-frequency events. |
+| [GreatFrontEnd — JavaScript Interview Playbook](https://www.greatfrontend.com/front-end-interview-playbook/javascript) | JavaScript concepts and common implementation techniques. |
+| [MDN — Web Glossary](https://developer.mozilla.org/en-US/docs/Glossary) | A broad technical vocabulary covering the web platform. |
+| [MDN — Web APIs](https://developer.mozilla.org/en-US/docs/Web/API) | Authoritative API definitions and code-level details. |
+| [MDN — AbortController](https://developer.mozilla.org/en-US/docs/Web/API/AbortController) | Cancelling supported asynchronous operations. |
+| [Stripe — Idempotent requests](https://docs.stripe.com/api/idempotent_requests) | Concrete server-side approach to safe request retries. |
 
-## 아키텍처·성능
+## 4. Architecture & performance
 
-| 자료 | 특징 |
+| Reference | Why it's useful |
 | --- | --- |
-| [Patterns.dev](https://www.patterns.dev/) | 웹 성능·컴포넌트·설계 패턴 |
-| [roadmap.sh — Frontend](https://roadmap.sh/frontend) | 프론트엔드 전체 학습 영역 |
-| [FrontScope Glossary](https://www.frontscope.dev/glossary/) | 프론트엔드 중심 용어 사전 |
-| [web.dev — Learn Performance](https://web.dev/learn/performance) | 브라우저·웹 성능 최적화 |
-| [web.dev — Web Vitals](https://web.dev/articles/vitals) | 사용자 체감 성능 지표 |
-| [React Reference](https://react.dev/reference/react) | React 컴포넌트·상태·렌더링 동작 |
+| [Patterns.dev](https://www.patterns.dev/) | Patterns for component composition, rendering, and performance. |
+| [roadmap.sh — Frontend Roadmap](https://roadmap.sh/frontend) | A map of technologies and topics a frontend engineer encounters. |
+| [FrontScope — Frontend Glossary](https://www.frontscope.dev/glossary/) | Additional frontend terminology and context. |
+| [React — Reference](https://react.dev/reference/react) | React semantics, hooks, rendering, and component APIs. |
+| [web.dev — Learn Performance](https://web.dev/learn/performance) | Practical performance techniques across loading and runtime. |
+| [web.dev — Web Vitals](https://web.dev/articles/vitals) | User-centric performance metrics and their interpretation. |
 
-## 품질·접근성·테스트
+## 5. Accessibility, testing & security
 
-| 자료 | 특징 |
+| Reference | Why it's useful |
 | --- | --- |
-| [WAI-ARIA Authoring Practices](https://www.w3.org/WAI/ARIA/apg/patterns/) | 접근 가능한 UI 패턴과 키보드 상호작용 |
-| [WCAG 2.2](https://www.w3.org/TR/WCAG22/) | 웹 콘텐츠 접근성 지침 |
-| [OWASP Cheat Sheet Series](https://cheatsheetseries.owasp.org/) | 실무 웹 보안 대응 지침 |
-| [Playwright Docs](https://playwright.dev/docs/intro) | E2E 테스트 기본 개념 |
+| [W3C — WAI-ARIA Authoring Practices](https://www.w3.org/WAI/ARIA/apg/patterns/) | Accessible UI interaction and keyboard behavior patterns. |
+| [W3C — WCAG 2.2](https://www.w3.org/TR/WCAG22/) | Web accessibility success criteria. |
+| [OWASP — Cheat Sheet Series](https://cheatsheetseries.owasp.org/) | Practical prevention guidance for common web security risks. |
+| [Playwright — Introduction](https://playwright.dev/docs/intro) | Browser automation and end-to-end testing documentation. |
 
-링크는 외부 사이트의 변경에 따라 이동할 수 있습니다. 깨진 링크나 더 권위 있는 원문이 발견되면 PR로 수정해주세요.
+## How to use sources responsibly
+
+1. Prefer specifications and official API docs for **normative behavior**.
+2. Prefer design-system guidance for **component anatomy and naming conventions**.
+3. Use blog posts and teaching resources as **explanations**, not universal rules.
+4. Verify current browser/framework support before applying version-sensitive details.
+5. Do not reproduce long passages, illustrations, or source code without checking licenses.
+
+Found a broken link or a stronger primary source? Please [open an issue](https://github.com/WhiteKiwi/frontend-glossary/issues).

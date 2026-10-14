@@ -1,32 +1,46 @@
-# 기여 가이드
+# Contributing to Frontend Glossary
 
-[← README](README.md)
+Thanks for helping make frontend vocabulary clearer. Contributions of all sizes are welcome: new terms, corrected definitions, examples, cross-links, and primary sources.
 
-## 원칙
+## Editorial rules
 
-1. **간결하고 정확하게:** 용어마다 정의 한 문장과 실무 예시·주의점을 작성합니다.
-2. **대표 분류 우선:** 8개 분야 중 가장 자연스러운 문서에 추가하되, 필요한 경우 관련 문서에서 다시 소개할 수 있습니다.
-3. **약어는 풀어 쓰기:** 첫 등장에 영문 전체 이름을 병기합니다.
-4. **추측하지 않기:** 구현 결과나 브라우저별 동작이 달라질 수 있는 곳에는 범위·조건을 명시합니다.
-5. **출처 남기기:** 전문적인 내용이나 논쟁적인 정의는 [REFERENCES.md](REFERENCES.md)에 공식 문서를 추가합니다.
-6. **저작권 지키기:** 타 문서의 설명을 대량 복사하지 말고 직접 서술합니다.
+1. **Use English throughout the repository.** Term labels should use widely recognized English names, and definitions and examples must also be in English.
+2. **Be concise and concrete.** Prefer a one-sentence definition plus a short real-world example.
+3. **Choose one primary category.** Cross-reference other categories when the concept overlaps.
+4. **Differentiate similarly named terms.** Note when component naming depends on a particular platform or design system.
+5. **Ground uncertain claims.** Add a reliable reference, preferably official documentation or a standard.
+6. **Avoid copy/paste.** Write original summaries instead of reproducing large sections of external articles.
+7. **Respect security and accessibility implications.** Avoid presenting UI-only prevention as a guarantee of server-side safety.
 
-## 추가 형식
+## Adding a glossary term
 
-각 분류의 Markdown 표에 다음 형식으로 한 줄을 추가하세요.
+Add a new row beneath the appropriate subsection in `glossary/*.md`:
 
 ```md
-| **Debounce** | 연속 이벤트가 멈춘 뒤 일정 시간 후 실행하는 방식 | 검색어 자동완성. |
+| <a id="debounce"></a>**Debounce** | Delay execution until a quiet period follows the latest event. | Search input |
 ```
 
-목록은 [INDEX.md](INDEX.md)에도 추가해주세요. 용어명이 다의적이라면 문맥과 비교 개념도 작성합니다.
+Use a unique, lowercase, hyphenated anchor based on the term. For example, `Bottom Sheet` uses `bottom-sheet`.
 
-## PR 체크리스트
+Update the [A–Z index](INDEX.md) and the term count in [README.md](README.md). If the term changes a comparison or implementation recommendation, update [COMPARISONS.md](COMPARISONS.md) or [RECIPES.md](RECIPES.md). New source material belongs in [REFERENCES.md](REFERENCES.md).
 
-- [ ] 정의가 한 문장으로 이해되는가?
-- [ ] 예시가 실제 개발 상황에 맞는가?
-- [ ] 비슷한 용어와 구분되는가?
-- [ ] 필요 시 공식 레퍼런스가 연결되었는가?
-- [ ] README 및 INDEX 링크가 정상인가?
+## Style guide
 
-오탈자 수정·용어 제안은 Issue와 PR 모두 환영합니다.
+- Write **JavaScript**, **TypeScript**, **CSS**, **HTTP**, and other canonical names with conventional capitalization.
+- Expand less-common acronyms in the definition.
+- Explain *what* a concept means; use the example to show *when* it is useful.
+- Avoid assuming one framework or component library defines every frontend convention.
+- Keep links relative for files inside this repository.
+- Preserve Markdown table structure and avoid unescaped pipe characters (`\\|`) in cells.
+
+## Pull request checklist
+
+- [ ] The definition is accurate and understandable on its own.
+- [ ] The example illustrates a genuine use case.
+- [ ] Similar terms are distinguished or cross-linked.
+- [ ] The new term has an anchor and is linked from `INDEX.md`.
+- [ ] The total in `README.md` is up to date.
+- [ ] Markdown renders correctly and links resolve.
+- [ ] External sources are cited where relevant.
+
+For discussion or uncertain terminology, start with an [issue](https://github.com/WhiteKiwi/frontend-glossary/issues).
