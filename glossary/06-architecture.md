@@ -1,43 +1,73 @@
-# 아키텍처
+# Architecture
 
-> 애플리케이션 구성·렌더링·컴포넌트 설계
+Component composition, rendering strategies, code organization, and application structure.
 
-[← 전체 목차](../README.md) · [알파벳 색인](../INDEX.md)
+[← Home](../README.md) · [A–Z index](../INDEX.md) · [Comparisons](../COMPARISONS.md) · [Sources](../REFERENCES.md)
 
-| 용어 | 설명 | 예시·주의점 |
+
+## Components & design patterns
+
+| Term | Definition | Example |
 | --- | --- | --- |
-| **Component** | UI를 재사용 가능한 단위로 분리한 구성 요소 | ProductCard. |
-| **Component Composition** | 작은 컴포넌트를 조합해 기능을 구축 | Card 안에 Button 구성. |
-| **Separation of Concerns** | 관심사를 책임별로 분리하는 설계 원칙 | 데이터 요청과 표시 분리. |
-| **Single Responsibility** | 모듈이 변경될 이유를 명확하게 한정하는 원칙 | 입력 검증 분리. |
-| **Custom Hook** | 반복되는 React 상태·부수효과 로직을 묶은 함수 | useDebouncedValue. |
-| **Higher-Order Component** | 컴포넌트를 입력받아 확장된 컴포넌트를 반환 | 접근 제어 래퍼. |
-| **Render Props** | 함수 형태의 prop으로 렌더링 제어를 위임 | 데이터를 자식 렌더 함수에 전달. |
-| **Compound Component** | 서로 협력하는 하위 컴포넌트로 API를 구성 | Tabs.List, Tabs.Trigger. |
-| **Headless UI** | 외형 없이 행동·접근성 로직을 제공하는 UI 방식 | 디자인 자유도가 높은 Select. |
-| **Atomic Design** | UI를 작은 원자부터 조립해 분류하는 사고틀 | atoms→molecules→organisms. |
-| **Design System** | UI 규칙·컴포넌트·토큰을 공동 관리하는 체계 | 팀 공통 버튼. |
-| **SPA (Single-Page Application)** | 페이지 전체 재로드 없이 화면을 전환하는 애플리케이션 | 클라이언트 라우터. |
-| **MPA (Multi-Page Application)** | 여러 HTML 문서를 페이지 이동으로 구성 | 전통적 서버 렌더링 사이트. |
-| **CSR (Client-Side Rendering)** | 주로 브라우저에서 UI를 렌더링 | 클라이언트 JS로 화면 구성. |
-| **SSR (Server-Side Rendering)** | 요청 시 서버에서 HTML을 생성 | 서버가 초기 화면 출력. |
-| **SSG (Static Site Generation)** | 빌드 시점에 HTML을 미리 생성 | 문서 사이트. |
-| **ISR (Incremental Static Regeneration)** | 정적 페이지를 일정 조건 아래 재생성하는 전략 | 프레임워크별 동작 차이. |
-| **Hydration** | 서버가 출력한 HTML에 클라이언트 상호작용을 연결하는 과정 | React hydrate. |
-| **Streaming SSR** | HTML을 한 번에 보내지 않고 준비되는 대로 스트리밍 | Suspense 경계별 전송. |
-| **React Server Components** | 서버에서 실행되어 클라이언트 번들과 분리되는 React 컴포넌트 모델 | 서버 데이터 접근 컴포넌트. |
-| **Islands Architecture** | 정적 HTML의 필요한 일부 영역만 대화형으로 활성화하는 구조 | 부분 하이드레이션. |
-| **Routing** | URL을 화면·리소스 처리기로 연결하는 체계 | /products/:id. |
-| **Nested Routing** | 라우트를 계층적으로 정의해 공통 레이아웃을 공유 | 설정 하위 페이지. |
-| **Micro Frontends** | 큰 프론트엔드를 독립 배포 가능한 작은 단위로 분리 | 도메인별 앱. |
-| **Monorepo** | 여러 패키지·프로젝트를 한 저장소에서 관리 | apps/와 packages/. |
-| **Feature-Sliced Design** | 기능과 계층 관점으로 프론트 코드를 조직하는 방법론 | features, entities, shared. |
-| **Dependency Injection** | 의존성을 내부 생성 대신 외부에서 제공하는 방식 | API 클라이언트 주입. |
-| **Error Boundary** | 하위 컴포넌트의 렌더링 오류를 포착해 대체 UI 표시 | React 에러 경계. |
-| **Suspense** | 비동기 준비 중인 하위 UI의 대체 표시를 선언하는 React 메커니즘 | fallback skeleton. |
-| **Portal** | 컴포넌트의 논리적 부모를 유지하며 DOM 다른 위치에 렌더링 | 모달 레이어. |
-| **Reconciliation** | React가 변경된 UI 트리를 비교·갱신하는 과정 | key의 중요성. |
+| <a id="component"></a>**Component** | A reusable, encapsulated unit of UI and behavior. | Button component |
+| <a id="composition"></a>**Composition** | Building complex interfaces by combining smaller units. | Card with Avatar and Title |
+| <a id="containerpresentational"></a>**Container/Presentational** | A design pattern separating data orchestration from rendering responsibilities. | Loader and item list |
+| <a id="custom-hook"></a>**Custom Hook** | A reusable React function that encapsulates hook-based logic. | useDebounce() |
+| <a id="hook"></a>**Hook** | An API that lets compatible components access state and lifecycle-like features. | useState() |
+| <a id="lifecycle"></a>**Lifecycle** | The stages of a UI component's existence and updates. | Mount, update, unmount |
+| <a id="side-effect"></a>**Side Effect** | An operation that affects or interacts with systems beyond pure value computation. | Subscribe to events |
+| <a id="dependency-injection"></a>**Dependency Injection** | Providing dependencies from outside a module instead of creating them internally. | Inject an API client |
+| <a id="separation-of-concerns"></a>**Separation of Concerns** | Organizing code so distinct responsibilities are managed independently. | Separate data fetching from display |
+| <a id="solid"></a>**SOLID** | Five object-oriented design principles for maintainable responsibilities and dependencies. | Single Responsibility Principle |
+| <a id="atomic-design"></a>**Atomic Design** | A method of organizing interfaces as atoms, molecules, organisms, and larger compositions. | Button to SearchForm |
+| <a id="design-system"></a>**Design System** | A coordinated library of design rules, tokens, components, and usage guidance. | Shared UI kit |
+| <a id="monorepo"></a>**Monorepo** | A repository containing multiple packages or projects. | App and component library in one repo |
+| <a id="microfrontend"></a>**Microfrontend** | A frontend architecture divided into independently developed and integrated application segments. | Separate checkout frontend |
 
----
+## Rendering strategies
 
-관련 참고 문헌은 [REFERENCES.md](../REFERENCES.md)에서 확인할 수 있습니다.
+| Term | Definition | Example |
+| --- | --- | --- |
+| <a id="spa"></a>**SPA** | Single-Page Application; navigation generally updates one loaded document on the client. | Client-side router |
+| <a id="mpa"></a>**MPA** | Multi-Page Application; navigation commonly loads different HTML documents. | Traditional server-rendered site |
+| <a id="csr"></a>**CSR** | Client-Side Rendering; UI is primarily generated in the browser. | JS-rendered dashboard |
+| <a id="ssr"></a>**SSR** | Server-Side Rendering; HTML is generated for a request on the server. | Server-rendered product page |
+| <a id="ssg"></a>**SSG** | Static Site Generation; HTML is generated ahead of requests, typically at build time. | Static documentation site |
+| <a id="isr"></a>**ISR** | Incremental Static Regeneration; a framework technique for regenerating static pages after deployment. | Next.js revalidation |
+| <a id="hydration"></a>**Hydration** | Attaching client-side state and interactivity to server-rendered markup. | React hydration |
+| <a id="streaming-ssr"></a>**Streaming SSR** | Sending server-rendered HTML progressively as parts become ready. | Stream content around Suspense |
+| <a id="react-server-components"></a>**React Server Components** | A React component model that renders selected components on the server and sends a serialized result. | Server-side data component |
+| <a id="islands-architecture"></a>**Islands Architecture** | A design that activates isolated interactive sections within mostly static HTML. | Interactive search widget on a static page |
+
+## Routing & infrastructure
+
+| Term | Definition | Example |
+| --- | --- | --- |
+| <a id="routing"></a>**Routing** | Mapping URLs to screens or resource handlers. | /users/:id |
+| <a id="client-side-routing"></a>**Client-side Routing** | Changing views and browser history without a full document navigation. | SPA route transitions |
+| <a id="nested-routing"></a>**Nested Routing** | Representing parent and child routes with shared UI structure. | Settings layout and subpages |
+| <a id="dynamic-route"></a>**Dynamic Route** | A route whose path includes variable segments. | /posts/[id] |
+| <a id="layout-route"></a>**Layout Route** | A route that supplies a layout shared by nested destinations. | Dashboard shell |
+| <a id="middleware"></a>**Middleware** | Logic placed between request arrival and its final handler or response. | Authentication check |
+| <a id="bff"></a>**BFF** | Backend for Frontend; a server layer tailored to a particular client interface. | Mobile-specific API composition |
+| <a id="api-gateway"></a>**API Gateway** | An entry point that routes and governs access to downstream APIs. | Central authentication and routing |
+| <a id="feature-flag"></a>**Feature Flag** | A configuration switch that enables or disables a feature independently of deployment. | Gradual rollout |
+| <a id="ab-testing"></a>**A/B Testing** | An experiment comparing variants across user groups. | Compare CTA text |
+| <a id="dependency-graph"></a>**Dependency Graph** | A graph describing how modules or packages depend on one another. | Bundle import dependencies |
+| <a id="tree-shaking"></a>**Tree Shaking** | Removing unused static module exports from output bundles. | Drop unused library code |
+| <a id="code-splitting"></a>**Code Splitting** | Dividing code into chunks loaded on demand. | Route-level lazy imports |
+| <a id="module-federation"></a>**Module Federation** | A technique for composing separately built modules at runtime. | Remote microfrontend module |
+| <a id="esm"></a>**ESM** | ECMAScript Modules; the standardized import/export module system. | import x from 'x' |
+| <a id="commonjs"></a>**CommonJS** | A module system commonly used by older Node.js code. | require('x') |
+
+## Rendering models & decisions
+
+| Term | Definition | Example |
+| --- | --- | --- |
+| <a id="reconciliation"></a>**Reconciliation** | Comparing desired UI with the previous representation to decide what to update. | React rerender diff |
+| <a id="virtual-dom"></a>**Virtual DOM** | An in-memory representation of a UI tree used by some libraries. | React element tree |
+| <a id="declarative-ui"></a>**Declarative UI** | Describing the desired interface state rather than direct manipulation steps. | Render view from state |
+| <a id="imperative-ui"></a>**Imperative UI** | Directly specifying steps that change interface elements. | element.appendChild() |
+| <a id="architecture-decision-record"></a>**Architecture Decision Record** | A short document recording an architectural choice, alternatives, and rationale. | ADR-001 |
+
+For related articles and official documentation, see [References](../REFERENCES.md).

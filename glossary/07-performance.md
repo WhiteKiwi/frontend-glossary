@@ -1,46 +1,67 @@
-# 성능·최적화
+# Performance & Optimization
 
-> 사용자 체감 속도와 리소스 효율 개선
+Browser speed, loading strategies, user-centric metrics, and efficient rendering.
 
-[← 전체 목차](../README.md) · [알파벳 색인](../INDEX.md)
+[← Home](../README.md) · [A–Z index](../INDEX.md) · [Comparisons](../COMPARISONS.md) · [Sources](../REFERENCES.md)
 
-| 용어 | 설명 | 예시·주의점 |
+
+## User-centric metrics
+
+| Term | Definition | Example |
 | --- | --- | --- |
-| **LCP (Largest Contentful Paint)** | 뷰포트의 주요 콘텐츠가 표시되기까지의 지표 | 큰 히어로 이미지 로딩. |
-| **CLS (Cumulative Layout Shift)** | 예기치 않은 레이아웃 이동의 누적 정도 | 이미지 크기 미지정. |
-| **INP (Interaction to Next Paint)** | 사용자 상호작용에 대한 전반적인 반응성 지표 | 느린 클릭 처리. |
-| **FCP (First Contentful Paint)** | 첫 텍스트·이미지 등이 표시되는 시점 | 초기 시각 응답. |
-| **TTFB (Time to First Byte)** | 요청 후 첫 응답 바이트를 받기까지의 시간 | 서버 응답 지연. |
-| **Core Web Vitals** | Google의 핵심 사용자 경험 측정 지표 모음 | LCP, CLS, INP. |
-| **Lazy Loading** | 필요할 때 자원을 뒤늦게 로드 | 화면 밖 이미지. |
-| **Eager Loading** | 자원을 미리 적극적으로 로드 | 중요 히어로 이미지. |
-| **Preload** | 현재 페이지에서 곧 필요한 리소스의 조기 로드를 알림 | 핵심 폰트. |
-| **Prefetch** | 향후 필요할 가능성이 있는 리소스를 미리 가져옴 | 다음 페이지 자원. |
-| **Preconnect** | 외부 출처에 사전 연결해 지연을 줄이는 힌트 | 폰트 CDN. |
-| **Code Splitting** | 코드를 작은 청크로 나눠 필요 시 로드 | 라우트 단위 분할. |
-| **Tree Shaking** | 사용하지 않는 정적 모듈 코드를 번들에서 제거 | 미사용 export 제거. |
-| **Bundle** | 여러 코드·자원을 묶어 배포하는 결과물 | app.js. |
-| **Minification** | 동작을 유지하면서 코드 표현을 줄이는 최적화 | 공백·이름 축소. |
-| **Compression** | 네트워크 전송 시 자원을 압축 | gzip, Brotli. |
-| **Critical Rendering Path** | 초기 화면을 그리기까지 브라우저가 수행하는 단계 | HTML→스타일→레이아웃. |
-| **Reflow / Layout** | 요소의 크기·위치를 다시 계산 | 폭 변경 후 재배치. |
-| **Repaint / Paint** | 시각적 내용을 다시 그림 | 배경색 변경. |
-| **Compositing** | 레이어를 합성해 화면을 구성 | transform 애니메이션. |
-| **Layout Thrashing** | 레이아웃 읽기와 쓰기를 반복해 동기 계산이 잦아지는 현상 | offsetWidth 반복. |
-| **Virtualization** | 보이는 일부 항목만 DOM에 렌더링 | 만 건짜리 목록. |
-| **Memoization** | 같은 입력의 계산 결과를 재사용 | 비싼 필터 결과 캐싱. |
-| **Debounce** | 짧은 간격의 반복 이벤트를 최종 실행으로 합침 | 입력 필터 호출 감소. |
-| **Throttle** | 짧은 간격의 이벤트 실행 횟수를 제한 | 스크롤 핸들러. |
-| **requestAnimationFrame** | 다음 화면 갱신 직전에 콜백 실행을 요청 | 시각 업데이트 조율. |
-| **requestIdleCallback** | 브라우저 유휴 구간에 낮은 우선순위 작업 요청 | 분석 작업 예약; 지원 환경 확인. |
-| **Web Worker** | 메인 스레드에서 무거운 연산을 분리 | 이미지 처리. |
-| **Image Optimization** | 해상도·포맷·압축을 상황에 맞게 조정 | AVIF/WebP, srcset. |
-| **Responsive Images** | 표시 환경에 맞는 크기의 이미지를 선택 | srcset, sizes. |
-| **Performance Budget** | 성능 상한을 팀 규칙으로 설정 | JS 200KB 이하. |
-| **Lighthouse** | 페이지 성능·접근성·SEO 등을 진단하는 도구 | 정기 점검. |
-| **Performance API** | 브라우저 성능 측정 정보 제공 API | performance.mark. |
-| **Long Task** | 메인 스레드를 장시간 점유하는 작업 | 사용자 입력 지연. |
+| <a id="core-web-vitals"></a>**Core Web Vitals** | A set of key metrics that describe real-world loading, interactivity, and visual stability. | LCP, INP, CLS |
+| <a id="lcp"></a>**LCP** | Largest Contentful Paint; the time when the largest eligible visible element is rendered. | Hero image appearing |
+| <a id="inp"></a>**INP** | Interaction to Next Paint; a metric of how promptly a page responds to user interactions. | Click response delay |
+| <a id="cls"></a>**CLS** | Cumulative Layout Shift; a measure of unexpected layout movement. | Image loading pushes content |
+| <a id="fcp"></a>**FCP** | First Contentful Paint; the time when the first piece of content is rendered. | First heading appears |
+| <a id="ttfb"></a>**TTFB** | Time to First Byte; the duration until the first response byte is received. | Slow origin response |
+| <a id="tbt"></a>**TBT** | Total Blocking Time; summed main-thread blocking time above a threshold during a measured loading period. | Heavy JS startup |
+| <a id="rum"></a>**RUM** | Real User Monitoring; collecting performance measurements from actual visits. | Field LCP telemetry |
+| <a id="synthetic-monitoring"></a>**Synthetic Monitoring** | Running predefined tests under controlled conditions. | Scheduled Lighthouse run |
+| <a id="lighthouse"></a>**Lighthouse** | A tool that audits page performance, accessibility, and other quality signals. | Performance report |
+| <a id="performance-budget"></a>**Performance Budget** | A defined limit for page weight, latency, or performance metrics. | Maximum JS bundle size |
 
----
+## Loading & network
 
-관련 참고 문헌은 [REFERENCES.md](../REFERENCES.md)에서 확인할 수 있습니다.
+| Term | Definition | Example |
+| --- | --- | --- |
+| <a id="lazy-loading"></a>**Lazy Loading** | Loading resources or code only when needed. | Below-the-fold images |
+| <a id="eager-loading"></a>**Eager Loading** | Loading resources immediately rather than deferring them. | Critical logo |
+| <a id="preload"></a>**Preload** | A resource hint that gives higher priority discovery to resources needed on the current page. | Important web font |
+| <a id="prefetch"></a>**Prefetch** | A resource hint for fetching content that may be needed in future navigation. | Likely next route |
+| <a id="preconnect"></a>**Preconnect** | A hint to establish an early connection to another origin. | Prepare font CDN connection |
+| <a id="dns-prefetch"></a>**DNS Prefetch** | A hint to resolve a domain name before a request needs it. | Third-party asset domain |
+| <a id="resource-hint"></a>**Resource Hint** | A browser hint that guides early fetching or connection work. | preload, preconnect |
+| <a id="critical-rendering-path"></a>**Critical Rendering Path** | The steps required for a browser to turn HTML, CSS, and JS into initial pixels. | Parse, style, layout, paint |
+| <a id="render-blocking"></a>**Render Blocking** | Resources or work that delay the browser's ability to display content. | Blocking stylesheet |
+
+## Rendering & computation
+
+| Term | Definition | Example |
+| --- | --- | --- |
+| <a id="reflowlayout"></a>**Reflow/Layout** | Computing or recomputing the size and position of elements. | Recalculate after width change |
+| <a id="repaint"></a>**Repaint** | Redrawing changed visual content when layout does not necessarily change. | Background color update |
+| <a id="compositing"></a>**Compositing** | Combining rendered layers into the final displayed image. | Transform animation layers |
+| <a id="layout-thrashing"></a>**Layout Thrashing** | Repeated alternating layout reads and writes that trigger forced synchronous layouts. | Loop calling offsetWidth |
+| <a id="virtualization"></a>**Virtualization** | Rendering only currently visible or nearby items from a large collection. | 100,000-row list |
+| <a id="memoization"></a>**Memoization** | Caching computation results for reuse with the same inputs. | useMemo() |
+| <a id="caching"></a>**Caching** | Storing computed or downloaded data to avoid repeating the work. | HTTP response cache |
+| <a id="image-optimization"></a>**Image Optimization** | Reducing image transfer and decode costs with suitable sizing and formats. | AVIF thumbnails |
+| <a id="responsive-images"></a>**Responsive Images** | Providing image candidates suited to display size and pixel density. | srcset and sizes |
+| <a id="webp"></a>**WebP** | An image format with lossy and lossless compression options. | Compressed product photo |
+| <a id="avif"></a>**AVIF** | An image format often achieving high visual quality at relatively small sizes. | Hero image asset |
+| <a id="svg"></a>**SVG** | Scalable Vector Graphics; an XML-based vector image format. | Crisp UI icon |
+| <a id="font-subsetting"></a>**Font Subsetting** | Including only the glyphs needed by a product or locale in a font file. | Subset Korean font |
+| <a id="foit"></a>**FOIT** | Flash of Invisible Text; text remains hidden while a web font loads. | Delayed headline |
+| <a id="fout"></a>**FOUT** | Flash of Unstyled Text; fallback text appears before the web font swaps in. | font-display: swap |
+| <a id="minification"></a>**Minification** | Reducing code size by removing unnecessary syntax and shortening safe identifiers. | Minified JavaScript |
+| <a id="compression"></a>**Compression** | Encoding resources more compactly for transfer. | Brotli or gzip |
+| <a id="bundle-analyzer"></a>**Bundle Analyzer** | A tool showing which modules contribute to bundle size. | Detect a large dependency |
+| <a id="long-task"></a>**Long Task** | Main-thread work lasting long enough to risk blocking user interaction. | A task over 50 ms |
+| <a id="main-thread"></a>**Main Thread** | The primary browser thread responsible for much DOM and UI work. | Click handler execution |
+| <a id="requestanimationframe"></a>**requestAnimationFrame** | An API that schedules a callback before a browser repaint. | Coordinate visual updates |
+| <a id="requestidlecallback"></a>**requestIdleCallback** | An API requesting callbacks during browser idle periods where supported. | Low-priority analytics work |
+| <a id="memory-leak"></a>**Memory Leak** | Memory that remains reachable and therefore uncollected despite no longer being useful. | Unremoved event listener |
+| <a id="backpressure"></a>**Backpressure** | Mechanisms for controlling producers when consumers cannot keep up. | Stream processing throttle |
+
+For related articles and official documentation, see [References](../REFERENCES.md).
