@@ -43,7 +43,7 @@ This collection brings together **official documentation**, recognized design sy
 | --- | --- |
 | [Patterns.dev](https://www.patterns.dev/) | Patterns for component composition, rendering, and performance. |
 | [roadmap.sh — Frontend Roadmap](https://roadmap.sh/frontend) | A map of technologies and topics a frontend engineer encounters. |
-| [FrontScope — Frontend Glossary](https://www.frontscope.dev/glossary/) | Additional frontend terminology and context. |
+| [web.dev — Learn JavaScript](https://web.dev/learn/javascript) | Guided explanations of the language used throughout frontend applications. |
 | [React — Reference](https://react.dev/reference/react) | React semantics, hooks, rendering, and component APIs. |
 | [web.dev — Learn Performance](https://web.dev/learn/performance) | Practical performance techniques across loading and runtime. |
 | [web.dev — Web Vitals](https://web.dev/articles/vitals) | User-centric performance metrics and their interpretation. |
