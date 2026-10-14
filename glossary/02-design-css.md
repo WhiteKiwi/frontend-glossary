@@ -1,61 +1,82 @@
-# 디자인·CSS
+# Design & CSS
 
-> 시각적 표현과 레이아웃을 제어하는 용어
+The visual language, layout mechanics, and responsive styling of web interfaces.
 
-[← 전체 목차](../README.md) · [알파벳 색인](../INDEX.md)
+[← Home](../README.md) · [A–Z index](../INDEX.md) · [Comparisons](../COMPARISONS.md) · [Sources](../REFERENCES.md)
 
-| 용어 | 설명 | 예시·주의점 |
+
+## Spacing, surfaces & typography
+
+| Term | Definition | Example |
 | --- | --- | --- |
-| **Design System** | 컴포넌트·규칙·토큰을 일관되게 운영하는 체계 | 디자인과 구현의 공동 기준. |
-| **Design Token** | 색상·간격 같은 디자인 결정을 이름 있는 값으로 관리하는 단위 | color.primary, spacing.2. |
-| **Typography** | 서체·크기·행간·무게 등 텍스트 시각 체계 | 본문과 제목 서체 규칙. |
-| **Font Family** | 사용할 서체 목록 | system-ui, sans-serif. |
-| **Font Weight** | 글자 획의 굵기 | 400 regular, 700 bold. |
-| **Line Height** | 텍스트 줄 사이의 높이 | 가독성을 좌우한다. |
-| **Letter Spacing** | 글자 사이 간격 | 제목 자간. |
-| **Visual Hierarchy** | 요소의 중요도를 크기·대비·위치로 표현하는 구조 | 주 CTA를 눈에 띄게. |
-| **Contrast** | 두 요소 간 밝기·색상·형태의 차이 | 텍스트 명암 대비. |
-| **Color Palette** | 사용할 색상들의 집합 | 브랜드색·중립색. |
-| **Opacity** | 요소의 불투명도 | opacity: 0.5. |
-| **Elevation** | 표면이 서로 다른 높이에 있는 것처럼 표현한 단계 | 그림자와 겹침. |
-| **Box Shadow** | 요소 주위에 그리는 그림자 | 카드의 깊이 표현. |
-| **Border** | 요소 경계선 | 1px solid. |
-| **Border Radius** | 모서리의 둥근 정도 | border-radius: 12px. |
-| **Spacing** | 요소 사이 또는 내부의 간격 체계 | 4·8·16px 스케일. |
-| **Margin** | 요소 경계 바깥쪽 여백 | margin-top. |
-| **Padding** | 요소 경계 안쪽 여백 | padding-inline. |
-| **Gap** | Flex/Grid 항목 사이 간격 | gap: 1rem. |
-| **Box Model** | 콘텐츠·패딩·테두리·마진으로 구성되는 CSS 상자 모델 | 크기 계산 기본. |
-| **Box Sizing** | width/height에 padding·border를 포함할지 결정 | border-box. |
-| **Display** | 요소의 기본 레이아웃 동작 | block, inline, flex, grid. |
-| **Flexbox** | 주 축과 교차 축을 기준으로 배치하는 1차원 레이아웃 | 가로 정렬. |
-| **Grid** | 행과 열을 정의하는 2차원 레이아웃 | 카드 격자. |
-| **Position** | 요소 배치의 기준과 방식을 설정 | relative, absolute, fixed, sticky. |
-| **Sticky** | 스크롤 위치가 임계점에 이르면 기준 영역 안에서 붙는 배치 | 고정형 섹션 헤더. |
-| **Overflow** | 내용이 상자 범위를 넘을 때의 처리 | hidden, auto, scroll. |
-| **Z-index** | 동일 스태킹 맥락 안에서 겹침 순서를 제어하는 값 | 팝업 계층. |
-| **Stacking Context** | 자식 요소의 쌓임 순서를 독립적으로 계산하는 맥락 | z-index가 기대와 다를 때 점검. |
-| **Specificity** | CSS 선택자 우선순위 계산 규칙 | ID와 클래스 충돌. |
-| **Cascade** | 출처·레이어·중요도·우선순위 등에 따라 CSS 선언을 결정하는 과정 | 마지막 선언만으로 결정되지 않는다. |
-| **Inheritance** | 일부 CSS 속성이 부모에서 자식으로 전달되는 동작 | color 상속. |
-| **Pseudo-class** | 요소 상태 등에 따라 선택하는 선택자 | :hover, :focus-visible. |
-| **Pseudo-element** | 요소의 특정 부분이나 생성 내용을 선택 | ::before, ::after. |
-| **CSS Custom Property** | CSS에서 정의하고 참조하는 사용자 지정 속성 | --space-sm. |
-| **Media Query** | 미디어 특성에 따라 스타일을 분기하는 규칙 | @media (min-width: 768px). |
-| **Container Query** | 부모 컨테이너 크기·스타일 등에 따라 분기 | 재사용 카드 레이아웃. |
-| **Breakpoint** | 레이아웃이 전환되는 조건상의 임계점 | 768px에서 2열로 전환. |
-| **Responsive Design** | 화면 크기에 유연히 적응하는 설계 | 유동 너비 레이아웃. |
-| **Adaptive Design** | 조건에 따라 미리 설계한 배치 중 하나를 선택 | 특정 화면 크기별 레이아웃. |
-| **Viewport** | 브라우저에서 콘텐츠가 표시되는 가시 영역 | 모바일 viewport. |
-| **DPR (Device Pixel Ratio)** | CSS 픽셀과 물리 픽셀 사이 비율 | 고해상도 이미지 선택. |
-| **rem** | 루트 요소 글꼴 크기에 상대적인 단위 | 1rem = 루트 font-size. |
-| **em** | 해당 속성에 따라 현재 요소 또는 부모의 글꼴 크기에 상대적인 단위 | font-size: 1.2em. |
-| **vh / vw** | 뷰포트 높이·너비의 1% 단위 | 100vh의 모바일 한계 주의. |
-| **dvh / svh / lvh** | 동적·최소·최대 뷰포트 높이 단위 | 모바일 주소창 변화를 고려. |
-| **Aspect Ratio** | 상자의 가로·세로 비율 | 16 / 9 썸네일. |
-| **Logical Properties** | 쓰기 방향에 독립적인 CSS 속성 | margin-inline-start. |
-| **Clamp** | 최솟값·선호값·최댓값 사이에서 값을 제한하는 함수 | clamp(1rem, 2vw, 2rem). |
+| <a id="box-model"></a>**Box Model** | The CSS model describing content, padding, border, and margin areas. | Debugging an element's width |
+| <a id="content-box"></a>**Content Box** | A box-sizing mode where declared width excludes padding and border. | box-sizing: content-box |
+| <a id="border-box"></a>**Border Box** | A box-sizing mode where declared width includes padding and border. | box-sizing: border-box |
+| <a id="margin"></a>**Margin** | Space outside an element's border. | margin-top: 16px |
+| <a id="padding"></a>**Padding** | Space between an element's content and its border. | padding-inline: 12px |
+| <a id="gap"></a>**Gap** | Space between items in a flex or grid layout. | gap: 1rem |
+| <a id="border"></a>**Border** | The visible edge around an element's padding and content. | border: 1px solid |
+| <a id="border-radius"></a>**Border Radius** | The curvature of an element's corners. | border-radius: 8px |
+| <a id="shadow"></a>**Shadow** | A visual shadow cast around or inside a box. | box-shadow |
+| <a id="elevation"></a>**Elevation** | A visual system suggesting surfaces at different depths. | Raised card surface |
+| <a id="opacity"></a>**Opacity** | The degree to which an element is transparent. | opacity: 0.5 |
+| <a id="typography"></a>**Typography** | The system for choosing and arranging typefaces, sizes, and spacing. | Body text at 16px |
+| <a id="line-height"></a>**Line Height** | The height of a line box used for text layout. | line-height: 1.5 |
+| <a id="letter-spacing"></a>**Letter Spacing** | The additional space inserted between characters. | letter-spacing: .02em |
+| <a id="font-weight"></a>**Font Weight** | The thickness or weight of a typeface's strokes. | font-weight: 600 |
+| <a id="color-palette"></a>**Color Palette** | A defined collection of colors used throughout a design. | Primary and neutral colors |
+| <a id="contrast"></a>**Contrast** | The visual difference between elements, particularly foreground and background. | Readable text contrast |
+| <a id="design-token"></a>**Design Token** | A named design decision represented as a reusable value. | --color-primary |
+| <a id="spacing-scale"></a>**Spacing Scale** | A consistent set of allowed spacing values. | 4, 8, 12, 16 |
 
----
+## Layout & positioning
 
-관련 참고 문헌은 [REFERENCES.md](../REFERENCES.md)에서 확인할 수 있습니다.
+| Term | Definition | Example |
+| --- | --- | --- |
+| <a id="flexbox"></a>**Flexbox** | A CSS layout system that aligns items along a main and cross axis. | Horizontal button row |
+| <a id="grid"></a>**Grid** | A CSS layout system for arranging items in rows and columns. | Responsive card grid |
+| <a id="inline"></a>**Inline** | A display mode that flows within a line of text. | display: inline |
+| <a id="block"></a>**Block** | A display mode that creates a block-level box. | display: block |
+| <a id="inline-block"></a>**Inline-block** | An inline-level box that can take explicit dimensions. | display: inline-block |
+| <a id="position-relative"></a>**Position Relative** | Positioning that offsets an element relative to its normal position. | position: relative |
+| <a id="position-absolute"></a>**Position Absolute** | Positioning removed from normal flow and placed relative to a containing block. | Badge over an image |
+| <a id="position-fixed"></a>**Position Fixed** | Positioning anchored to a fixed containing block, commonly the viewport. | Floating support button |
+| <a id="position-sticky"></a>**Position Sticky** | Positioning that sticks to a threshold while staying within its scroll container. | Sticky section heading |
+| <a id="z-index"></a>**Z-index** | A property controlling stack order within a stacking context. | Popup above content |
+| <a id="stacking-context"></a>**Stacking Context** | A group whose descendants are stacked independently of outside elements. | Unexpected overlay ordering |
+| <a id="overflow"></a>**Overflow** | How content extending beyond an element's box is handled. | overflow: auto |
+| <a id="viewport"></a>**Viewport** | The visible area used to display a web page. | Mobile browser viewport |
+
+## Responsive design
+
+| Term | Definition | Example |
+| --- | --- | --- |
+| <a id="breakpoint"></a>**Breakpoint** | A condition at which a responsive design changes layout. | Two columns above 768px |
+| <a id="media-query"></a>**Media Query** | A conditional CSS rule based on media or user-environment features. | @media (min-width: 768px) |
+| <a id="container-query"></a>**Container Query** | A CSS rule based on a container's size or style rather than the viewport. | Adaptive sidebar card |
+| <a id="responsive-design"></a>**Responsive Design** | A design approach that flexibly adapts to available space. | Fluid columns |
+| <a id="adaptive-design"></a>**Adaptive Design** | A design approach that selects among intentionally defined layouts. | Separate mobile and desktop layouts |
+| <a id="aspect-ratio"></a>**Aspect Ratio** | The proportional relationship between width and height. | aspect-ratio: 16 / 9 |
+
+## CSS rules & units
+
+| Term | Definition | Example |
+| --- | --- | --- |
+| <a id="specificity"></a>**Specificity** | A part of the CSS cascade used to prioritize competing selectors. | ID versus class selectors |
+| <a id="cascade"></a>**Cascade** | The CSS process for resolving competing declarations using origin, importance, layers, specificity, and order. | Why a rule wins |
+| <a id="inheritance"></a>**Inheritance** | The propagation of certain CSS property values from parent to child. | Inherited text color |
+| <a id="pseudo-class"></a>**Pseudo-class** | A selector matching a state or structural condition of an element. | :hover or :focus-visible |
+| <a id="pseudo-element"></a>**Pseudo-element** | A selector addressing a represented part of an element. | ::before |
+| <a id="css-variable"></a>**CSS Variable** | A CSS custom property that can be reused with var(). | --space-md |
+| <a id="logical-properties"></a>**Logical Properties** | CSS properties expressed relative to writing direction and flow. | margin-inline-start |
+| <a id="unit-px"></a>**Unit px** | A CSS pixel, the standard reference-length unit. | width: 320px |
+| <a id="unit-rem"></a>**Unit rem** | A length relative to the root element's font size. | padding: 1rem |
+| <a id="unit-em"></a>**Unit em** | A length relative to the relevant element's font size, depending on property. | font-size: 1.2em |
+| <a id="unit-vwvh"></a>**Unit vw/vh** | Units equal to 1% of the viewport width or height. | width: 100vw |
+| <a id="unit-dvh"></a>**Unit dvh** | A unit based on the dynamic viewport height. | min-height: 100dvh |
+| <a id="object-fit"></a>**Object-fit** | How replaced content fits inside its allocated box. | object-fit: cover |
+| <a id="css-reset"></a>**CSS Reset** | Styles that remove or standardize browser defaults. | Reset margin and padding |
+| <a id="utility-first-css"></a>**Utility-first CSS** | A styling approach built from small, single-purpose classes. | Tailwind utilities |
+| <a id="bem"></a>**BEM** | Block Element Modifier; a naming convention for CSS classes. | card__title--large |
+
+For related articles and official documentation, see [References](../REFERENCES.md).

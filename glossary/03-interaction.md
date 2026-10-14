@@ -1,56 +1,73 @@
-# 인터랙션
+# Interaction
 
-> 사용자 입력·상태 변화·모션·이벤트 실행 제어
+Events, UI states, gestures, animation, and execution controls.
 
-[← 전체 목차](../README.md) · [알파벳 색인](../INDEX.md)
+[← Home](../README.md) · [A–Z index](../INDEX.md) · [Comparisons](../COMPARISONS.md) · [Sources](../REFERENCES.md)
 
-| 용어 | 설명 | 예시·주의점 |
+
+## Input & states
+
+| Term | Definition | Example |
 | --- | --- | --- |
-| **Hover** | 포인터가 요소 위에 있는 상태 | 마우스가 버튼 위에 있을 때; 터치 환경은 다르다. |
-| **Focus** | 키보드 등 입력이 향하는 요소의 상태 | 탭 키로 버튼 포커스. |
-| **Focus Visible** | 포커스 표시가 필요한 상황을 선택하는 상태 | :focus-visible. |
-| **Active / Pressed** | 요소가 누르는 중인 상태 | :active. |
-| **Selected** | 여러 항목 중 선택된 상태 | 선택한 탭. |
-| **Disabled** | 요소가 현재 조작 불가능한 상태 | 비활성 제출 버튼. |
-| **Read-only** | 값을 수정할 수 없지만 읽기는 가능한 상태 | 읽기 전용 입력. |
-| **Loading** | 비동기 작업 등이 진행 중인 상태 | 저장 중 버튼. |
-| **Click** | 포인팅 장치로 활성화하는 이벤트 | 버튼 클릭. |
-| **Tap** | 터치 장치를 짧게 누르는 제스처 | 모바일 카드 선택. |
-| **Double Click / Double Tap** | 짧은 간격으로 두 번 활성화하는 입력 | 지도 확대. |
-| **Long Press** | 대상을 일정 시간 길게 누르는 제스처 | 항목 추가 메뉴. |
-| **Swipe** | 접촉을 유지한 채 빠르게 미는 동작 | 목록 항목 삭제. |
-| **Drag and Drop** | 대상을 끌어 다른 위치에 놓는 상호작용 | 파일 업로드. |
-| **Pointer Event** | 마우스·펜·터치를 공통으로 처리하는 이벤트 | pointerdown. |
-| **Touch Event** | 터치 입력 전용 이벤트 | touchstart. |
-| **Keyboard Event** | 키 누름과 해제 이벤트 | keydown, keyup. |
-| **Event Bubbling** | 이벤트가 대상에서 상위 조상으로 전파되는 단계 | 부모 클릭 핸들러. |
-| **Event Capturing** | 이벤트가 상위 조상에서 대상 방향으로 전달되는 단계 | 캡처 단계 리스너. |
-| **Event Delegation** | 상위 요소에서 하위 요소 이벤트를 함께 처리하는 기법 | 동적 목록 클릭 처리. |
-| **preventDefault** | 브라우저 기본 동작의 실행을 방지 | 폼 기본 제출 취소. |
-| **stopPropagation** | 이벤트 전파를 더 이상 진행하지 않게 함 | 부모 클릭 차단. |
-| **Debounce** | 마지막 호출 이후 일정 시간 조용해졌을 때 실행 | 검색어 자동완성. |
-| **Throttle** | 연속 이벤트 처리 빈도를 일정 수준으로 제한 | 스크롤 위치 처리. |
-| **Leading Edge** | 시간 구간의 처음에 함수를 실행하는 옵션 | 첫 클릭 즉시 실행. |
-| **Trailing Edge** | 시간 구간의 끝에서 함수를 실행하는 옵션 | 최신 입력 반영. |
-| **Cooldown** | 실행 후 일정 시간 추가 실행을 금지하는 정책 | 버튼 연타 제한. |
-| **In-flight Guard** | 작업 진행 중 동일 동작을 다시 시작하지 못하게 막는 보호 | 결제 요청 중 버튼 비활성화. |
-| **Request Deduplication** | 동일한 요청의 중복 실행을 피하거나 결과를 공유하는 처리 | 같은 목록 API 호출 합치기. |
-| **Single-flight** | 동일 키의 동시 작업 하나만 실행하고 결과를 함께 받는 패턴 | 액세스 토큰 갱신. |
-| **Idempotency** | 동일 작업을 여러 번 적용해도 추가 효과가 발생하지 않는 특성 | 주문 생성에 멱등 키 적용; 서버 보장 필요. |
-| **Race Condition** | 실행 순서·완료 시점에 따라 결과가 잘못 달라지는 문제 | 오래된 검색 응답 덮어쓰기. |
-| **AbortController** | 취소 신호를 전달해 지원하는 비동기 작업을 중단하는 API | 이전 fetch 요청 취소. |
-| **Retry** | 실패한 작업을 다시 시도하는 전략 | 일시적 네트워크 오류. |
-| **Exponential Backoff** | 재시도 간격을 지수적으로 늘리는 방식 | 1초→2초→4초. |
-| **Optimistic UI** | 서버 확인 전에 성공을 예상하고 먼저 화면을 바꾸는 패턴 | 좋아요 즉시 반영. |
-| **Transition** | CSS 값 변화 사이를 보간하는 애니메이션 | 버튼 배경색 변화. |
-| **Keyframes** | 애니메이션의 중간 상태를 정의하는 CSS 규칙 | @keyframes fade. |
-| **Easing** | 움직임의 시간당 변화 속도를 결정하는 함수 | ease-out. |
-| **Spring Animation** | 스프링 역학을 모사한 모션 | 탄성 있는 시트. |
-| **Transform** | 요소를 이동·회전·확대·축소하는 변형 | translateX. |
-| **Gesture Recognition** | 일련의 입력을 탭·스와이프 등의 의도로 해석 | 드래그 판단. |
-| **Reduced Motion** | 사용자 모션 감소 선호를 반영하는 접근성 대응 | prefers-reduced-motion. |
-| **Focus Trap** | 모달 등의 내부로 키보드 포커스를 제한 | 대화상자 밖으로 탭이 나가지 않게. |
+| <a id="click"></a>**Click** | A pointer activation event, commonly triggered by a mouse button. | Click a Save button |
+| <a id="tap"></a>**Tap** | A brief touch interaction that activates an element. | Tap a mobile card |
+| <a id="double-click"></a>**Double Click** | Two quick consecutive clicks recognized as one gesture. | Open a desktop file |
+| <a id="long-press"></a>**Long Press** | Holding contact for a duration to trigger an alternate action. | Open a context menu |
+| <a id="hover"></a>**Hover** | A state in which a pointing device is over an element. | Highlight a menu item |
+| <a id="focus"></a>**Focus** | The state of an element currently receiving keyboard or other directed input. | Focus a text field |
+| <a id="focus-visible"></a>**Focus Visible** | A focus state for which the browser determines a visible indicator is appropriate. | :focus-visible styling |
+| <a id="active-state"></a>**Active State** | An activation state; CSS :active refers to an element being activated, such as while pressed. | Pressed button feedback |
+| <a id="disabled-state"></a>**Disabled State** | A state preventing a control from being operated. | Submit button before form completion |
+| <a id="readonly-state"></a>**Readonly State** | An input state allowing reading but not editing its value. | Read-only account ID |
+| <a id="selected-state"></a>**Selected State** | A state marking an item as chosen from a set. | Selected tab |
+| <a id="swipe"></a>**Swipe** | A directional touch gesture across a surface. | Swipe a carousel |
+| <a id="drag-and-drop"></a>**Drag and Drop** | Moving an item by dragging it to a drop target. | Reorder list items |
+| <a id="pointer-event"></a>**Pointer Event** | An event family that unifies mouse, pen, and touch pointer input. | pointerdown |
+| <a id="touch-event"></a>**Touch Event** | An event reporting changes in one or more touch contacts. | touchstart |
+| <a id="keyboard-event"></a>**Keyboard Event** | An event reporting key presses and releases. | keydown |
 
----
+## Event handling
 
-관련 참고 문헌은 [REFERENCES.md](../REFERENCES.md)에서 확인할 수 있습니다.
+| Term | Definition | Example |
+| --- | --- | --- |
+| <a id="event-bubbling"></a>**Event Bubbling** | The phase in which an event travels from its target through ancestors. | Card receives child click |
+| <a id="event-capturing"></a>**Event Capturing** | The phase in which an event travels down the ancestor chain to its target. | Capture-phase listener |
+| <a id="event-delegation"></a>**Event Delegation** | Handling child element events through a shared ancestor listener. | Click handling for dynamic rows |
+| <a id="prevent-default"></a>**Prevent Default** | Cancelling an event's browser-defined default action when permitted. | Prevent normal form submission |
+| <a id="stop-propagation"></a>**Stop Propagation** | Stopping an event from continuing through its propagation path. | Prevent parent click reaction |
+
+## Timing & repeat protection
+
+| Term | Definition | Example |
+| --- | --- | --- |
+| <a id="debounce"></a>**Debounce** | Delaying execution until a specified quiet period follows the most recent event. | Search after typing stops |
+| <a id="throttle"></a>**Throttle** | Limiting how often a function can execute during repeated events. | Scroll position tracking |
+| <a id="leading-edge"></a>**Leading Edge** | Executing a rate-controlled callback at the start of an event burst. | Respond to first click immediately |
+| <a id="trailing-edge"></a>**Trailing Edge** | Executing a rate-controlled callback at the end of an event burst. | Process the final typed value |
+| <a id="cooldown"></a>**Cooldown** | Disallowing a repeated action for a fixed period after execution. | Resend-code timer |
+| <a id="double-submit-guard"></a>**Double-submit Guard** | Blocking a duplicate submission while the previous submission is still in progress. | Disable Pay while pending |
+
+## Animation & motion
+
+| Term | Definition | Example |
+| --- | --- | --- |
+| <a id="transition"></a>**Transition** | Interpolating CSS property values when they change. | Hover color transition |
+| <a id="animation"></a>**Animation** | Changing visual properties over a defined timeline. | Entrance animation |
+| <a id="keyframe"></a>**Keyframe** | A declared property state at a specific point in an animation. | @keyframes fade-in |
+| <a id="easing"></a>**Easing** | A function controlling how animation progress changes over time. | ease-in-out |
+| <a id="spring-animation"></a>**Spring Animation** | Animation driven by an approximation of spring and damping physics. | Bouncy drawer motion |
+| <a id="transform"></a>**Transform** | Visual translation, scaling, rotation, or skew without altering document flow. | transform: translateX() |
+| <a id="fade"></a>**Fade** | Appearance or disappearance through opacity changes. | Fade out a dialog |
+| <a id="slide"></a>**Slide** | Entrance, exit, or movement achieved by shifting position. | Bottom sheet slides up |
+| <a id="microinteraction"></a>**Microinteraction** | A small response to a single user action, communicating status or feedback. | Heart animation after Like |
+| <a id="reduced-motion"></a>**Reduced Motion** | Adapting motion to a user's preference for less animation. | prefers-reduced-motion |
+| <a id="scroll-snap"></a>**Scroll Snap** | Aligning scrolled content to predefined stopping positions. | Snapping gallery panels |
+| <a id="scroll-lock"></a>**Scroll Lock** | Temporarily preventing scrolling in a region, often behind an overlay. | Lock page behind modal |
+| <a id="focus-trap"></a>**Focus Trap** | Restricting keyboard focus to a particular region while it is active. | Modal Tab navigation |
+| <a id="outside-click"></a>**Outside Click** | Detecting pointer activity outside an active panel. | Dismiss open popover |
+| <a id="optimistic-feedback"></a>**Optimistic Feedback** | Showing an expected successful result before the server confirms it. | Instant Like highlight |
+| <a id="haptic-feedback"></a>**Haptic Feedback** | Providing tactile feedback, such as vibration, after an action. | Phone confirmation pulse |
+| <a id="gesture-conflict"></a>**Gesture Conflict** | When two gesture recognizers compete for the same movement. | Horizontal swipe versus vertical scroll |
+| <a id="touch-target"></a>**Touch Target** | The interactive area available for touch activation. | Increase a small icon's hit area |
+
+For related articles and official documentation, see [References](../REFERENCES.md).

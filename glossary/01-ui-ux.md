@@ -1,79 +1,95 @@
-# UI/UX
+# UI & UX
 
-> 화면을 구성하는 요소와 사용자의 과업을 설명하는 용어
+The building blocks, navigation patterns, controls, and product concepts that shape an interface.
 
-[← 전체 목차](../README.md) · [알파벳 색인](../INDEX.md)
+[← Home](../README.md) · [A–Z index](../INDEX.md) · [Comparisons](../COMPARISONS.md) · [Sources](../REFERENCES.md)
 
-| 용어 | 설명 | 예시·주의점 |
+
+## Page structure & navigation
+
+| Term | Definition | Example |
 | --- | --- | --- |
-| **Header** | 페이지 또는 화면의 상단 영역 | 브랜드·검색·내비게이션을 배치한다. |
-| **Footer** | 페이지의 하단 공통 영역 | 법적 고지나 보조 링크를 둔다. |
-| **Navbar (Navigation Bar)** | 주요 화면 간 이동을 제공하는 내비게이션 막대 | 웹의 상단 메뉴나 앱의 탐색 영역. |
-| **GNB (Global Navigation Bar)** | 서비스 전반에 공통으로 적용되는 전역 탐색 메뉴 | 전체 서비스 메뉴. |
-| **LNB (Local Navigation Bar)** | 특정 영역 안에서만 쓰는 지역 탐색 메뉴 | 관리자 설정의 하위 메뉴. |
-| **Sidebar** | 본문 옆에 배치되는 보조 영역 | 필터·카테고리·탐색 목록. |
-| **Hero** | 페이지 상단에서 핵심 메시지를 강조하는 큰 콘텐츠 영역 | 랜딩 페이지 첫 섹션. |
-| **CTA (Call to Action)** | 사용자에게 중요한 행동을 유도하는 요소 | 가입하기 버튼. |
-| **Above the Fold** | 스크롤하지 않고 처음 보이는 화면 영역 | 핵심 제안을 초반에 노출. |
-| **Breadcrumb** | 현재 위치의 상위 계층을 보여주는 경로 표시 | 홈 > 제품 > 상세. |
-| **Tab / Tab Bar** | 동일한 맥락 안에서 표시할 콘텐츠를 전환하는 탭 | 프로필의 게시물·정보 전환. |
-| **Bottom Navigation** | 화면 아래에 배치하는 주요 목적지 간 탐색 | 모바일 앱의 홈·검색·마이. |
-| **Drawer** | 화면 가장자리에서 열리는 패널 | 측면 탐색 메뉴. |
-| **Bottom Sheet** | 화면 아래쪽에서 올라오는 시트형 패널 | 옵션 선택 또는 상세 행동. |
-| **Side Sheet** | 화면 측면에 겹쳐 나타나는 시트 | 목록을 유지하며 상세 편집. |
-| **Mega Menu** | 많은 카테고리를 넓은 패널에 펼친 메뉴 | 전자상거래 전체 카테고리. |
-| **Dropdown Menu** | 트리거로 펼쳐지는 작업·선택 목록 | 더보기 메뉴. |
-| **Context Menu** | 대상에 대한 맥락별 동작 메뉴 | 우클릭 메뉴. |
-| **Pagination** | 콘텐츠를 페이지 단위로 나누고 이동하는 패턴 | 페이지 번호. |
-| **Infinite Scroll** | 아래로 스크롤하면 콘텐츠를 이어 로드하는 패턴 | 소셜 피드. |
-| **Stepper** | 단계의 순서와 진행 상태를 보여주는 요소 | 가입 1/3 단계. |
-| **Button** | 행동을 실행하는 기본 컨트롤 | 저장·취소. |
-| **Icon Button** | 텍스트 대신 아이콘을 주요 표시로 쓰는 버튼 | 닫기 X 버튼; 접근 가능한 이름 필요. |
-| **FAB (Floating Action Button)** | 화면에 떠 있는 주요 행동 버튼 | 새 글 작성. |
-| **Card** | 한 대상에 대한 정보를 묶는 표면 | 상품 카드. |
-| **Badge** | 짧은 상태·수량을 나타내는 라벨 | NEW, 알림 3. |
-| **Chip** | 짧은 항목·필터·선택을 표현하는 요소 | 선택한 관심사. |
-| **Avatar** | 사용자나 대상을 나타내는 작은 시각 표현 | 프로필 이미지. |
-| **Accordion** | 제목을 눌러 관련 내용을 펼치거나 접는 패턴 | FAQ 목록. |
-| **Carousel** | 항목들을 순차적으로 넘겨 보여주는 영역 | 배너 슬라이더. |
-| **Divider** | 콘텐츠 영역을 시각적으로 분리하는 선 또는 간격 | 설정 그룹 구분. |
-| **Tooltip** | 대개 호버·포커스 시 짧은 도움말을 표시하는 팝업 | 아이콘 설명; 핵심 기능의 유일한 설명으로 쓰지 않는다. |
-| **Popover** | 특정 트리거 주변에 나타나는 보조 콘텐츠 패널 | 작은 설정 패널. |
-| **Hover Card** | 대상에 포인터를 올리면 나타나는 풍부한 정보 패널 | 사용자 프로필 미리보기. |
-| **Modal** | 나머지 화면과의 상호작용을 막으며 전면에 뜨는 UI 방식 | 모달 다이얼로그. |
-| **Dialog** | 확인·입력·결정 등을 요구하는 독립된 대화상자 | 삭제 확인. |
-| **Alert Dialog** | 주의가 필요한 결정을 요청하는 대화상자 | 되돌릴 수 없는 삭제 확인. |
-| **Toast** | 동작 결과를 짧게 알리고 자동 사라지는 비차단 알림 | 저장되었습니다. |
-| **Snackbar** | 화면 가장자리의 짧은 피드백 영역 | 저장됨 + 실행취소; 디자인 시스템마다 Toast와 구분이 다르다. |
-| **Banner** | 화면 내 일정 영역에 유지되는 공지·상태 표시 | 서비스 점검 안내. |
-| **Inline Alert** | 현재 콘텐츠 맥락 안에 표시되는 경고·안내 | 폼 상단 오류. |
-| **Skeleton** | 실제 콘텐츠 형태를 흉내 내는 로딩 자리표시자 | 카드 로딩. |
-| **Spinner** | 진행 중임을 나타내는 회전형 표시 | 버튼 요청 중. |
-| **Progress Bar** | 진행률 또는 처리 진행을 막대로 나타내는 요소 | 파일 업로드 65%. |
-| **Empty State** | 표시할 데이터가 없을 때의 안내 화면 | 검색 결과 없음. |
-| **Error State** | 문제가 생겼을 때 원인과 복구 행동을 제공하는 상태 | 다시 시도 버튼. |
-| **Text Field** | 한 줄의 텍스트를 입력하는 필드 | 이메일 입력. |
-| **Textarea** | 여러 줄의 텍스트 입력 영역 | 자기소개 작성. |
-| **Select** | 정해진 선택지에서 값을 고르는 컨트롤 | 국가 선택. |
-| **Combobox** | 입력과 목록 선택을 결합한 컨트롤 | 자동완성 지역 검색. |
-| **Autocomplete** | 입력한 내용에 따라 후보를 제시하는 기능 | 주소 자동완성. |
-| **Checkbox** | 여러 개를 독립적으로 선택하는 컨트롤 | 관심 분야 선택. |
-| **Radio Button** | 하나의 그룹에서 한 옵션을 선택하는 컨트롤 | 결제 수단 선택. |
-| **Switch / Toggle** | 이진 설정을 즉시 켜거나 끄는 컨트롤 | 알림 수신 설정. |
-| **Slider** | 연속 값이나 범위를 드래그로 선택하는 컨트롤 | 볼륨 조절. |
-| **Date Picker** | 날짜를 선택하는 UI | 예약일 선택. |
-| **Form Validation** | 입력값이 요구 조건에 맞는지 확인하는 절차 | 이메일 형식 검사. |
-| **Helper Text** | 입력 필드 옆의 보조 설명 | 비밀번호 조건 안내. |
-| **Placeholder** | 입력칸에 임시로 표시하는 힌트 | 예: 이름 입력; 레이블 대용이 아니다. |
-| **Label** | 입력값의 의미를 알려주는 이름 | 이메일 주소. |
-| **Wireframe** | 세부 시각 디자인 전 화면 구조를 잡은 설계도 | 낮은 충실도의 레이아웃. |
-| **Mockup** | 실제 외관에 가까운 정적인 화면 시안 | 색상·서체가 적용된 시안. |
-| **Prototype** | 흐름과 상호작용을 시험하는 시제품 | 클릭 가능한 디자인. |
-| **User Flow** | 목적 달성까지 거치는 사용자 경로 | 검색→선택→결제. |
-| **Affordance** | 요소가 어떤 행동을 가능하게 하는지 지각시키는 단서 | 버튼처럼 보이는 시각 형태. |
-| **Progressive Disclosure** | 필요한 시점에 세부 정보를 점차 공개하는 원칙 | 고급 설정 접기. |
-| **Dark Pattern** | 사용자를 오도하거나 원치 않는 선택을 유도하는 설계 | 해지 버튼 숨기기. |
+| <a id="header"></a>**Header** | The top region of a page or section, usually containing identity and primary controls. | Site logo and navigation |
+| <a id="footer"></a>**Footer** | The bottom region with supplementary links and information. | Legal links and contact details |
+| <a id="navbar"></a>**Navbar** | A navigation bar linking to major destinations in a site or app. | Primary menu across the top |
+| <a id="gnb"></a>**GNB** | Global Navigation Bar; navigation shared across the entire product. | Products, pricing, and support |
+| <a id="lnb"></a>**LNB** | Local Navigation Bar; navigation within one section or feature. | Settings submenu |
+| <a id="hero"></a>**Hero** | A prominent introductory area that communicates a page's main value. | Landing-page headline and image |
+| <a id="cta"></a>**CTA** | Call to Action; an element designed to prompt a particular user action. | Sign up button |
+| <a id="above-the-fold"></a>**Above the Fold** | The portion of a page visible before the user scrolls. | Initial headline and CTA |
+| <a id="landing-page"></a>**Landing Page** | A purpose-built page for a campaign, audience, or conversion goal. | Newsletter signup page |
+| <a id="sidebar"></a>**Sidebar** | A panel beside the main content, often for navigation or filters. | Documentation table of contents |
+| <a id="breadcrumb"></a>**Breadcrumb** | A trail showing the user's position within a content hierarchy. | Home > Products > Cameras |
+| <a id="tab"></a>**Tab** | A selectable control that switches between related content panels. | Overview and Activity tabs |
+| <a id="tab-bar"></a>**Tab Bar** | A grouped set of tabs used to switch views or destinations. | Tabs beneath an app header |
+| <a id="bottom-navigation"></a>**Bottom Navigation** | Primary destination navigation positioned at the bottom of a screen. | Home, Search, and Profile |
+| <a id="drawer"></a>**Drawer** | A panel that slides out from a screen edge. | Slide-out mobile menu |
+| <a id="bottom-sheet"></a>**Bottom Sheet** | A panel that rises from the bottom edge, often for choices or actions. | Share options on mobile |
+| <a id="side-sheet"></a>**Side Sheet** | A supplementary panel emerging from the side while preserving context. | Editing a selected item |
 
----
+## Overlays & feedback
 
-관련 참고 문헌은 [REFERENCES.md](../REFERENCES.md)에서 확인할 수 있습니다.
+| Term | Definition | Example |
+| --- | --- | --- |
+| <a id="modal"></a>**Modal** | An interaction mode that makes background content unavailable until dismissed. | Blocking confirmation dialog |
+| <a id="dialog"></a>**Dialog** | A separate interface surface for a decision, message, or input. | Delete confirmation |
+| <a id="popover"></a>**Popover** | A small overlay positioned near a trigger, potentially containing interactive content. | Filter options panel |
+| <a id="tooltip"></a>**Tooltip** | A short, usually noninteractive explanation shown on hover or focus. | Icon description |
+| <a id="toggletip"></a>**Toggletip** | An explanation that users explicitly open and dismiss, typically by clicking a control. | Help button revealing guidance |
+| <a id="toast"></a>**Toast** | A brief, nonblocking message that usually disappears automatically. | Changes saved |
+| <a id="snackbar"></a>**Snackbar** | A transient message, often near a screen edge; naming differs by design system. | Saved with Undo action |
+| <a id="alert"></a>**Alert** | A prominent message about a condition requiring attention. | Permission denied |
+| <a id="banner"></a>**Banner** | A full-width or substantial in-page message area. | Scheduled maintenance notice |
+| <a id="badge"></a>**Badge** | A compact marker indicating a count, label, or status. | Unread messages: 3 |
+| <a id="chip"></a>**Chip** | A small element representing a value, selection, or filter. | Selected category filter |
+
+## Content components & loading
+
+| Term | Definition | Example |
+| --- | --- | --- |
+| <a id="card"></a>**Card** | A container grouping information and actions about one item. | Product preview |
+| <a id="avatar"></a>**Avatar** | A visual representation of a person or entity. | User profile circle |
+| <a id="accordion"></a>**Accordion** | A disclosure pattern for expanding and collapsing sections. | FAQ item |
+| <a id="carousel"></a>**Carousel** | A sequence of items displayed within one navigable viewport. | Image slider |
+| <a id="stepper"></a>**Stepper** | An indicator or control for a multistep process. | Checkout step 2 of 3 |
+| <a id="pagination"></a>**Pagination** | Dividing a result set into numbered or sequential pages. | Previous and Next |
+| <a id="infinite-scroll"></a>**Infinite Scroll** | Loading additional content as the user nears the end of a scrollable area. | Social media feed |
+| <a id="skeleton"></a>**Skeleton** | A placeholder approximating the final content layout during loading. | Gray card placeholders |
+| <a id="spinner"></a>**Spinner** | A looping visual indicator that work is in progress. | Loading wheel |
+| <a id="progress-bar"></a>**Progress Bar** | A visual indicator of task completion or indeterminate progress. | Upload at 70% |
+| <a id="empty-state"></a>**Empty State** | The interface shown when there is no content to display. | No search results |
+| <a id="error-state"></a>**Error State** | The interface used when an operation fails, ideally with a recovery action. | Retry button after a failed load |
+
+## Forms & controls
+
+| Term | Definition | Example |
+| --- | --- | --- |
+| <a id="form"></a>**Form** | A group of input controls for collecting and submitting data. | Registration form |
+| <a id="input"></a>**Input** | A control for entering a single-line value. | Email address field |
+| <a id="textarea"></a>**Textarea** | A control for entering multiline text. | Feedback comment |
+| <a id="select"></a>**Select** | A control that chooses one or more values from a predefined list. | Country selector |
+| <a id="combobox"></a>**Combobox** | An input paired with a list of suggested or selectable options. | Searchable city picker |
+| <a id="autocomplete"></a>**Autocomplete** | Suggestions generated as the user types. | Address suggestions |
+| <a id="checkbox"></a>**Checkbox** | A control for an independent boolean or multiple selections. | Agree to terms |
+| <a id="radio-button"></a>**Radio Button** | A control for choosing one item within a mutually exclusive group. | Shipping method |
+| <a id="switch"></a>**Switch** | A control that immediately changes a binary setting. | Enable notifications |
+| <a id="slider"></a>**Slider** | A control for adjusting a value or range by moving a handle. | Volume control |
+| <a id="date-picker"></a>**Date Picker** | A control for choosing a date or date range. | Booking calendar |
+| <a id="fab"></a>**FAB** | Floating Action Button; a prominent action button that floats over content. | Compose button |
+
+## UX planning & communication
+
+| Term | Definition | Example |
+| --- | --- | --- |
+| <a id="wireframe"></a>**Wireframe** | A low-fidelity representation of layout, hierarchy, and content. | Grayscale screen plan |
+| <a id="mockup"></a>**Mockup** | A static, higher-fidelity visual representation of an interface. | Styled screen proposal |
+| <a id="prototype"></a>**Prototype** | A model used to test behaviors and flows before full implementation. | Clickable design prototype |
+| <a id="user-flow"></a>**User Flow** | The sequence of actions and screens used to complete a task. | Signup to first purchase |
+| <a id="affordance"></a>**Affordance** | A property that determines what actions an object makes possible. | A handle that can be pulled |
+| <a id="signifier"></a>**Signifier** | A perceivable cue communicating where or how to act. | Underlined clickable link |
+| <a id="visual-hierarchy"></a>**Visual Hierarchy** | An arrangement that guides attention through relative prominence. | Large heading and primary button |
+| <a id="progressive-disclosure"></a>**Progressive Disclosure** | Revealing details when needed to reduce initial complexity. | Expandable advanced settings |
+| <a id="onboarding"></a>**Onboarding** | The experience introducing new users to a product or feature. | First-run setup guide |
+| <a id="microcopy"></a>**Microcopy** | Short interface text that guides actions and explains outcomes. | Password requirements hint |
+
+For related articles and official documentation, see [References](../REFERENCES.md).

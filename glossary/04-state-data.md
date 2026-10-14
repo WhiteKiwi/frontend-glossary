@@ -1,48 +1,68 @@
-# 상태·데이터
+# State & Data
 
-> 상태의 소유권·서버 통신·동시성·캐시
+State ownership, network data, caching, asynchronous work, and concurrency.
 
-[← 전체 목차](../README.md) · [알파벳 색인](../INDEX.md)
+[← Home](../README.md) · [A–Z index](../INDEX.md) · [Comparisons](../COMPARISONS.md) · [Sources](../REFERENCES.md)
 
-| 용어 | 설명 | 예시·주의점 |
+
+## State models & ownership
+
+| Term | Definition | Example |
 | --- | --- | --- |
-| **State** | UI 표시나 동작에 영향을 주는 변경 가능한 값 | 열린 메뉴 여부. |
-| **Props** | 부모에서 자식 컴포넌트로 전달하는 입력 값 | 제목·콜백. |
-| **Local State** | 특정 컴포넌트 내부에 보관하는 상태 | 아코디언 열림. |
-| **Global State** | 여러 화면·컴포넌트가 공유하는 상태 | 테마·계정 정보. |
-| **Server State** | 서버가 원본을 소유하는 비동기 데이터 상태 | 상품 목록. |
-| **Derived State** | 기존 상태로 계산 가능한 값 | 총액 = 단가×수량. |
-| **State Management** | 상태 변경·공유·동기화를 설계하는 방식 | Reducer·외부 스토어. |
-| **Controlled Component** | 입력값을 외부 상태가 제어하는 컴포넌트 | React value+onChange. |
-| **Uncontrolled Component** | 입력값 등을 DOM 내부에 맡기는 컴포넌트 | defaultValue+ref. |
-| **Reducer** | 현재 상태와 액션으로 다음 상태를 계산하는 함수 | 복잡한 폼 흐름. |
-| **Context** | 컴포넌트 트리를 통해 값을 전달하는 메커니즘 | 테마 공유. |
-| **Immutability** | 기존 객체를 직접 바꾸지 않고 새 값을 만드는 원칙 | 배열 복사 후 갱신. |
-| **Promise** | 비동기 작업의 최종 완료 또는 실패를 표현하는 객체 | fetch 결과. |
-| **async / await** | Promise 기반 비동기 로직을 순차식으로 표현하는 구문 | await fetch(). |
-| **Callback** | 다른 함수에 전달되어 이후 실행되는 함수 | onClick 처리기. |
-| **Fetch API** | HTTP 요청을 수행하는 웹 API | fetch('/api'). |
-| **REST** | 리소스와 HTTP 의미 체계를 사용하는 API 스타일 | GET /products. |
-| **GraphQL** | 클라이언트가 필요한 데이터 구조를 질의하는 API 방식 | 상품과 리뷰를 요청. |
-| **WebSocket** | 양방향 지속 연결 통신 프로토콜 | 실시간 채팅. |
-| **SSE (Server-Sent Events)** | 서버에서 클라이언트로 이벤트를 스트리밍하는 HTTP 기반 방식 | 알림 스트림. |
-| **Polling** | 일정 간격으로 서버에 반복 조회 | 상태 5초마다 확인. |
-| **Long Polling** | 서버가 결과를 기다렸다가 응답하면 다시 요청 | 실시간성 보완. |
-| **Cache** | 반복 조회 비용을 줄이기 위해 결과를 저장 | 상품 목록 캐시. |
-| **Cache Invalidation** | 오래된 캐시가 유효하지 않음을 판정·무효화 | 상품 수정 후 목록 갱신. |
-| **Stale-While-Revalidate** | 오래된 캐시를 우선 보여주고 백그라운드 재검증 | 목록 즉시 표시. |
-| **TTL (Time to Live)** | 캐시 데이터의 유효 시간 | 5분 TTL. |
-| **Optimistic Update** | 요청 성공 전에 UI·캐시를 먼저 변경 | 좋아요 선반영 후 실패 시 롤백. |
-| **Pessimistic Update** | 서버 성공 응답 후 UI를 갱신 | 계좌 이체 완료 후 반영. |
-| **Rollback** | 실패 시 잠정 상태를 이전 값으로 복구 | 좋아요 취소. |
-| **Mutation** | 서버 데이터의 변경 작업 | POST·PATCH·DELETE. |
-| **Pagination** | 데이터를 여러 페이지로 나눠 요청 | page=2. |
-| **Cursor Pagination** | 마지막 항목의 위치를 가리키는 커서로 다음 결과 조회 | nextCursor. |
-| **Offset Pagination** | 건너뛸 개수로 페이지를 구분 | offset=20. |
-| **Race Condition** | 동시 작업 순서로 결과가 의도와 달라지는 상황 | 검색 요청 응답 역전. |
-| **Request Deduplication** | 동일 데이터 요청을 공유하거나 중복 제거 | 동시 API 요청 단일화. |
-| **Idempotency Key** | 중복 요청을 같은 작업으로 식별하는 키 | 결제·주문 생성. |
+| <a id="state"></a>**State** | Data representing the current condition of an interface or application. | isDialogOpen |
+| <a id="props"></a>**Props** | Inputs passed from a parent component to a child. | title prop |
+| <a id="local-state"></a>**Local State** | State managed within a component or its close subtree. | Expanded accordion |
+| <a id="global-state"></a>**Global State** | State shared across distant parts of an application. | Signed-in user |
+| <a id="server-state"></a>**Server State** | Data whose authoritative source is a remote server. | Product catalog |
+| <a id="derived-state"></a>**Derived State** | Values computed from other state instead of separately stored. | Filtered item count |
+| <a id="state-machine"></a>**State Machine** | A model listing valid states and transitions between them. | idle → loading → success |
+| <a id="reducer"></a>**Reducer** | A function computing the next state from the current state and an action. | React useReducer |
+| <a id="controlled-component"></a>**Controlled Component** | A component whose current input value is controlled by external state. | value and onChange |
+| <a id="uncontrolled-component"></a>**Uncontrolled Component** | A component that keeps its input value in an internal or DOM-managed state. | ref to an input |
+| <a id="single-source-of-truth"></a>**Single Source of Truth** | A design principle that assigns one authoritative representation to each fact. | Avoid duplicated totals |
+| <a id="prop-drilling"></a>**Prop Drilling** | Passing props through intermediate components that do not otherwise need them. | Deeply nested theme prop |
+| <a id="context"></a>**Context** | A mechanism for sharing values with a component subtree. | React ThemeContext |
+| <a id="store"></a>**Store** | A container holding application state and providing update mechanisms. | Redux store |
+| <a id="immutable-update"></a>**Immutable Update** | Producing a new value instead of mutating an existing state object in place. | Copy array before changing |
 
----
+## Updates, caching & communication
 
-관련 참고 문헌은 [REFERENCES.md](../REFERENCES.md)에서 확인할 수 있습니다.
+| Term | Definition | Example |
+| --- | --- | --- |
+| <a id="optimistic-update"></a>**Optimistic Update** | Updating the UI immediately, then confirming or reverting based on server outcome. | Like button updates instantly |
+| <a id="rollback"></a>**Rollback** | Reverting a tentative update when it fails. | Undo failed optimistic Like |
+| <a id="pessimistic-update"></a>**Pessimistic Update** | Updating the UI only after the server confirms the action. | Display transfer after approval |
+| <a id="cache"></a>**Cache** | Stored results reused to avoid repeated work or network requests. | Cached product list |
+| <a id="cache-invalidation"></a>**Cache Invalidation** | Marking cached data invalid when it may no longer match the source. | Refetch after editing item |
+| <a id="stale-data"></a>**Stale Data** | Cached information that is no longer the most recent available version. | Old search results |
+| <a id="stale-while-revalidate"></a>**Stale-While-Revalidate** | Showing available cached data while fetching a newer version in the background. | Instant list plus refresh |
+| <a id="ttl"></a>**TTL** | Time to Live; the duration for which stored data is considered valid or retained. | Five-minute cache TTL |
+| <a id="polling"></a>**Polling** | Requesting fresh data repeatedly at a configured interval. | Check job status every 5 seconds |
+| <a id="long-polling"></a>**Long Polling** | An HTTP request the server holds until data is available or a timeout occurs. | Near-real-time notifications |
+| <a id="sse"></a>**SSE** | Server-Sent Events; a one-way event stream from server to browser over HTTP. | Live progress events |
+| <a id="websocket"></a>**WebSocket** | A protocol for continuous, bidirectional messages over one connection. | Realtime collaboration |
+| <a id="request-deduplication"></a>**Request Deduplication** | Avoiding redundant requests by merging, sharing, or discarding equivalent work. | Share identical GET requests |
+| <a id="single-flight"></a>**Single-flight** | Ensuring concurrent calls for the same key share one in-progress operation. | One token refresh for many callers |
+| <a id="idempotency"></a>**Idempotency** | A property whereby repeating an operation has no additional effect after the first application. | Payment request with an idempotency key |
+| <a id="race-condition"></a>**Race Condition** | A bug or hazard in which outcome depends on the ordering of concurrent operations. | Out-of-order search responses |
+| <a id="abortcontroller"></a>**AbortController** | A Web API that sends abort signals to supporting asynchronous operations. | Cancel a previous fetch |
+| <a id="retry"></a>**Retry** | Attempting a failed operation again according to defined conditions. | Retry transient network failure |
+| <a id="exponential-backoff"></a>**Exponential Backoff** | Increasing retry delays exponentially after successive failures. | 1s, 2s, 4s |
+| <a id="jitter"></a>**Jitter** | Adding random variation to delays to reduce synchronized retry spikes. | Randomized retry wait |
+| <a id="rate-limiting"></a>**Rate Limiting** | Restricting the number of operations allowed in a time interval. | 100 API requests per minute |
+
+## Pagination & representation
+
+| Term | Definition | Example |
+| --- | --- | --- |
+| <a id="infinite-query"></a>**Infinite Query** | A pattern that fetches and accumulates successive result pages. | Infinite scrolling feed |
+| <a id="cursor-pagination"></a>**Cursor Pagination** | Fetching the next results relative to an opaque or ordered cursor. | nextCursor token |
+| <a id="offset-pagination"></a>**Offset Pagination** | Fetching results by a skip count and page size. | offset=20&limit=10 |
+| <a id="normalization"></a>**Normalization** | Organizing data to reduce duplication and allow consistent references. | Entities keyed by ID |
+| <a id="serialization"></a>**Serialization** | Converting a value into a format suitable for transport or storage. | Object to JSON |
+| <a id="deserialization"></a>**Deserialization** | Reconstructing a value from its stored or transmitted representation. | JSON into an object |
+| <a id="validation"></a>**Validation** | Checking that data satisfies defined constraints. | Validate email format |
+| <a id="hydration-mismatch"></a>**Hydration Mismatch** | A discrepancy between server HTML and the client's initial render result. | Rendering a random number on both sides |
+| <a id="error-boundary"></a>**Error Boundary** | A component boundary that catches supported rendering errors and displays fallback UI. | React error fallback |
+
+For related articles and official documentation, see [References](../REFERENCES.md).
