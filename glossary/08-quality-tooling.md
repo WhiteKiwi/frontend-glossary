@@ -76,7 +76,7 @@ Accessibility, discoverability, tests, application security, and developer workf
 | <a id="formatter"></a>**Formatter** | A tool that standardizes code layout automatically. | Prettier |
 | <a id="ci"></a>**CI** | Continuous Integration; automatic validation when changes are merged or proposed. | PR test pipeline |
 | <a id="cd"></a>**CD** | Continuous Delivery or Deployment; automating release readiness or actual rollout. | Production deployment workflow |
-| <a id="feature-flag"></a>**Feature Flag** | A configuration switch used to control feature availability without new deployment. | Gradual launch |
+| <a id="gradual-rollout"></a>**Gradual Rollout** | A release strategy that progressively exposes a feature to more users or groups. | Enable new checkout for 5% of users |
 | <a id="observability"></a>**Observability** | The ability to infer system behavior from telemetry such as logs, traces, and metrics. | Investigate frontend errors |
 | <a id="sentry"></a>**Sentry** | An example of a service for collecting application errors and performance events. | Track production crashes |
 

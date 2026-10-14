@@ -2,7 +2,7 @@
 
 > [← Home](README.md) · [Browse by category](README.md#browse-by-category)
 
-**393 entries across eight categories.** Select a term to jump directly to its definition.
+**393 unique entries across eight categories.** Select a term to jump directly to its definition.
 
 [A](#a) · [B](#b) · [C](#c) · [D](#d) · [E](#e) · [F](#f) · [G](#g) · [H](#h) · [I](#i) · [J](#j) · [K](#k) · [L](#l) · [M](#m) · [N](#n) · [O](#o) · [P](#p) · [Q](#q) · [R](#r) · [S](#s) · [T](#t) · [U](#u) · [V](#v) · [W](#w) · [X](#x) · [Z](#z)
 
@@ -158,7 +158,6 @@
 | [Fade](glossary/03-interaction.md#fade) | Interaction | Appearance or disappearance through opacity changes. |
 | [FCP](glossary/07-performance.md#fcp) | Performance & Optimization | First Contentful Paint; the time when the first piece of content is rendered. |
 | [Feature Flag](glossary/06-architecture.md#feature-flag) | Architecture | A configuration switch that enables or disables a feature independently of deployment. |
-| [Feature Flag](glossary/08-quality-tooling.md#feature-flag) | Quality, Security & Tooling | A configuration switch used to control feature availability without new deployment. |
 | [Fetch API](glossary/05-web-browser.md#fetch-api) | Web & Browser | A browser API for making and handling network requests. |
 | [Fixture](glossary/08-quality-tooling.md#fixture) | Quality, Security & Tooling | Reusable input or environment data prepared for tests. |
 | [Flaky Test](glossary/08-quality-tooling.md#flaky-test) | Quality, Security & Tooling | A test whose outcome varies without a meaningful change in the code under test. |
@@ -184,6 +183,7 @@
 | [Gesture Conflict](glossary/03-interaction.md#gesture-conflict) | Interaction | When two gesture recognizers compete for the same movement. |
 | [Global State](glossary/04-state-data.md#global-state) | State & Data | State shared across distant parts of an application. |
 | [GNB](glossary/01-ui-ux.md#gnb) | UI & UX | Global Navigation Bar; navigation shared across the entire product. |
+| [Gradual Rollout](glossary/08-quality-tooling.md#gradual-rollout) | Quality, Security & Tooling | A release strategy that progressively exposes a feature to more users or groups. |
 | [GraphQL](glossary/05-web-browser.md#graphql) | Web & Browser | A query language and runtime for APIs where clients specify requested fields. |
 | [Grid](glossary/02-design-css.md#grid) | Design & CSS | A CSS layout system for arranging items in rows and columns. |
 
